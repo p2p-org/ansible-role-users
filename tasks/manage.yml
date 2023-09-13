@@ -1,5 +1,4 @@
 ---
-
 - name: Adding primary group
   group:
     name: "{{ users_group }}"
@@ -18,6 +17,12 @@
   loop_control:
     loop_var: user
   when: user.hosts is not defined or inventory_hostname in user.hosts
+
+- name: Manage sudo
+  include_tasks: manage_sudo.yml
+  with_items: "{{ users }}"
+  loop_control:
+    loop_var: user
 
 - name: Removing users
   user:
