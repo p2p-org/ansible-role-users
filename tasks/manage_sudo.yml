@@ -1,0 +1,19 @@
+- name: Add configured user accounts to passwordless sudoers.
+  lineinfile:
+    dest: /etc/sudoers.d/ansible_sudoers
+    regexp: "^{{ user.username }}"
+    line: "{{ user.username }} ALL=(ALL) NOPASSWD: ALL"
+    state: present
+    validate: "visudo -cf %s"
+    mode: 0440
+  when: user.sudoers_passwordless | default(false)
+
+- name: Add configured user accounts to passworded sudoers.
+  lineinfile:
+    dest: /etc/sudoers.d/ansible_sudoers
+    regexp: "^{{ user.username }}"
+    line: "{{ user.username }} ALL=(ALL) ALL"
+    state: present
+    validate: "visudo -cf %s"
+    mode: 0440
+  when: user.sudoers_passworded | default(false)
