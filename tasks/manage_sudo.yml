@@ -6,6 +6,7 @@
     state: present
     validate: "visudo -cf %s"
     mode: 0440
+    create: true
   when: user.sudoers_passwordless | default(false)
 
 - name: Add configured user accounts to passworded sudoers.
@@ -16,4 +17,5 @@
     state: present
     validate: "visudo -cf %s"
     mode: 0440
+    create: true
   when: user.sudoers_passworded | default(false)
