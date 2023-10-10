@@ -1,0 +1,13 @@
+name: Security Testing
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  sast:
+      uses: p2p-org/security-workflows/.github/workflows/sast.yaml@main
+      secrets: inherit
+  iac-check:
+      uses: p2p-org/security-workflows/.github/workflows/iac.yaml@main
+      secrets: inherit
