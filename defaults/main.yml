@@ -53,7 +53,7 @@ users_group:
 # default user's secondary groups
 users_groups: []
 # default user's home directory permissions
-users_home_mode: "0755"
+users_home_mode: "0750"
 # default user login shell
 #users_shell:
 # default user's ssh key type
